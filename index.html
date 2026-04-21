@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schooly 2026 – Registrace</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0D1B2A; --navy2: #1E3A5F;
+    --orange: #F4A020; --light: #E8F4FD; --white: #ffffff;
+  }
+  body { font-family: 'Barlow', sans-serif; background: var(--navy); color: var(--light); min-height: 100vh; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 80% 10%, rgba(244,160,32,.13) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 60% at 10% 80%, rgba(30,58,95,.6) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .topbar { height: 7px; background: linear-gradient(90deg, var(--orange), #FFC45E); }
+  header { position: relative; z-index: 1; text-align: center; padding: 2.5rem 1rem 1.5rem; }
+  .bike { font-size: 2.2rem; animation: pulse 2.5s ease-in-out infinite; display: block; margin-bottom: .4rem; }
+  @keyframes pulse {
+    0%,100% { filter: drop-shadow(0 0 10px rgba(244,160,32,.4)); }
+    50%      { filter: drop-shadow(0 0 22px rgba(244,160,32,.85)); }
+  }
+  h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2.6rem, 8vw, 4rem); font-weight: 800; color: var(--orange); text-transform: uppercase; line-height: 1; }
+  .subtitle { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--light); opacity: .75; margin-top: .35rem; }
+  .date-badge { display: inline-block; background: var(--orange); color: var(--navy); font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: .9rem; letter-spacing: .1em; text-transform: uppercase; padding: .28rem 1.1rem; border-radius: 2rem; margin-top: .9rem; }
+  .divider { width: 70px; height: 3px; background: var(--orange); margin: 1.3rem auto; border-radius: 2px; }
+  .card { position: relative; z-index: 1; max-width: 520px; margin: 0 auto 4rem; padding: 0 1rem; }
+  .form-box { background: rgba(255,255,255,.04); border: 1px solid rgba(244,160,32,.18); border-radius: 16px; padding: 2.2rem 1.8rem; backdrop-filter: blur(8px); box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .95rem; letter-spacing: .15em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.1rem; display: flex; align-items: center; gap: .5rem; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: rgba(244,160,32,.22); }
+  .field { margin-bottom: 1.15rem; }
+  label { display: block; font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--light); opacity: .8; margin-bottom: .45rem; }
+  input, select { width: 100%; background: rgba(255,255,255,.07); border: 1.5px solid rgba(255,255,255,.11); border-radius: 8px; color: var(--white); font-family: 'Barlow', sans-serif; font-size: 1rem; padding: .72rem 1rem; outline: none; transition: border-color .2s, background .2s; appearance: none; -webkit-appearance: none; }
+  input::placeholder { color: rgba(255,255,255,.28); }
+  input:focus, select:focus { border-color: var(--orange); background: rgba(244,160,32,.07); }
+  .select-wrap { position: relative; }
+  .select-wrap::after { content: '▾'; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--orange); pointer-events: none; }
+  select option { background: #1E3A5F; color: var(--white); }
+  .sep { height: 1px; background: rgba(255,255,255,.07); margin: 1.6rem 0; }
+  .info-box { background: rgba(244,160,32,.07); border-left: 3px solid var(--orange); border-radius: 0 8px 8px 0; padding: .75rem 1rem; font-size: .85rem; line-height: 1.55; color: var(--light); margin-bottom: 1.1rem; }
+  .info-box strong { color: var(--orange); }
+  .note { font-size: .78rem; color: rgba(255,255,255,.4); line-height: 1.5; margin-top: .5rem; }
+  .note strong { color: var(--orange); }
+  .vyzvy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; margin-top: .6rem; }
+  .vyzva-pill { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 7px; padding: .45rem .7rem; font-size: .82rem; color: rgba(255,255,255,.65); transition: opacity .3s; }
+  .vyzva-pill span { color: var(--orange); font-weight: 600; display: block; font-size: .83rem; }
+  .vyzva-pill.dim { opacity: .3; }
+  .btn-submit { width: 100%; margin-top: 1.6rem; padding: 1rem; background: var(--orange); color: var(--navy); border: none; border-radius: 10px; font-family: 'Barlow Condensed', sans-serif; font-size: 1.25rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: transform .15s, box-shadow .15s; box-shadow: 0 4px 20px rgba(244,160,32,.3); }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(244,160,32,.5); }
+  .btn-submit:active { transform: translateY(0); }
+  .free-note { text-align: center; margin-top: .9rem; font-size: .78rem; color: rgba(255,255,255,.3); }
+  #confirm-screen { display: none; text-align: center; padding: 1rem 0; }
+  .confirm-icon { font-size: 3.5rem; margin-bottom: .8rem; animation: popIn .4s ease; }
+  @keyframes popIn { 0%{transform:scale(0)} 80%{transform:scale(1.15)} 100%{transform:scale(1)} }
+  .confirm-name { font-family:'Barlow Condensed',sans-serif; font-size:1.9rem; font-weight:800; color:var(--orange); text-transform:uppercase; }
+  .confirm-detail { font-size:.92rem; color:var(--light); opacity:.8; margin-top:.4rem; line-height:1.7; white-space: pre-line; }
+  .strava-note { margin-top: 1.4rem; background: rgba(255,255,255,.05); border-left: 3px solid var(--orange); border-radius: 0 8px 8px 0; padding: .85rem 1rem; font-size: .84rem; color: var(--light); text-align: left; line-height: 1.55; }
+  .strava-note a { color: var(--orange); }
+  footer { position: relative; z-index: 1; text-align: center; padding: 1.5rem 1rem 2.5rem; font-size: .78rem; color: rgba(255,255,255,.28); }
+  footer a { color: var(--orange); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="topbar"></div>
+
+<header>
+  <span class="bike">🚴</span>
+  <h1>Schooly 2026</h1>
+  <p class="subtitle">Celostátní studentská cyklovýzva</p>
+  <span class="date-badge">4. května – 7. června 2026</span>
+  <div class="divider"></div>
+</header>
+
+<div class="card">
+  <div class="form-box">
+
+    <div id="reg-form">
+
+      <p class="section-title">👤 Osobní údaje</p>
+
+      <div class="field">
+        <label>Jméno a příjmení *</label>
+        <input type="text" id="name" placeholder="Jan Novák" autocomplete="name">
+      </div>
+      <div class="field">
+        <label>E-mail *</label>
+        <input type="email" id="email" placeholder="jan.novak@student.gymberoun.cz" autocomplete="email">
+      </div>
+
+      <div class="sep"></div>
+
+      <p class="section-title">🏫 Škola a třída</p>
+
+      <!-- Typ účastníka -->
+      <div class="field">
+        <label>Typ účastníka *</label>
+        <div class="select-wrap">
+          <select id="role" onchange="onRoleChange()">
+            <option value="">– vyber –</option>
+            <option value="student">🎒 Student</option>
+            <option value="ucitel">👨‍🏫 Učitel / zaměstnanec školy</option>
+            <option value="verejnost">🧍 Veřejnost (bez školy)</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="school-block" style="display:none;">
+        <div class="field">
+          <label>Škola *</label>
+          <div class="select-wrap">
+            <select id="school" onchange="onSchoolChange()">
+              <option value="">– vyber školu –</option>
+              <option value="gymberoun">Gymnázium Joachima Barranda Beroun</option>
+              <option value="jina">Jiná škola (ZŠ / SŠ / VŠ)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field" id="field-trida" style="display:none;">
+        <label>Třída *</label>
+        <div class="select-wrap">
+          <select id="trida" onchange="onTridaChange()">
+            <option value="">– nejdřív vyber školu –</option>
+          </select>
+        </div>
+        <p class="note" id="trida-note" style="margin-top:.6rem;"></p>
+      </div>
+
+      <div class="info-box" id="ucitel-note" style="display:none;">
+        Učitelé soutěží jako samostatný tým — <strong>Tým učitelů</strong>.
+        Km se sčítají dohromady a zároveň soutěžíš v individuálních výzvách.
+      </div>
+
+      <div class="sep"></div>
+
+      <p class="section-title">📱 Strava</p>
+
+      <div class="info-box">
+        Kilometry se měří automaticky přes <strong>Stravu</strong> (zdarma).
+        Propojení dokončíš po registraci na schooly.cz — trvá 30 sekund.
+      </div>
+
+      <div class="field">
+        <label>Strava profil <em style="font-weight:400;text-transform:none;opacity:.6">(nepovinné)</em></label>
+        <input type="text" id="strava" placeholder="strava.com/athletes/12345">
+        <p class="note">Pokud Stravu ještě nemáš, stáhni ji zdarma a zaregistruj se.</p>
+      </div>
+
+      <div class="sep"></div>
+
+      <p class="section-title">🏆 Výzvy</p>
+      <p class="note" style="margin-bottom:.8rem; font-size:.83rem; color:rgba(255,255,255,.55);">
+        Každá jízda se počítá do všech výzev automaticky — nic nenastavuješ.
+      </p>
+
+      <div class="vyzvy-grid">
+        <div class="vyzva-pill"><span>🏅 Kilometrová</span>km za týden</div>
+        <div class="vyzva-pill"><span>📏 Vzdálenostní</span>nejdelší jízda</div>
+        <div class="vyzva-pill"><span>⛰ Vrchařská</span>výškové metry</div>
+        <div class="vyzva-pill"><span>📍 Sběratelská</span>navštivuj místa</div>
+        <div class="vyzva-pill class-pill"><span>👥 Třídní</span>součet km třídy</div>
+        <div class="vyzva-pill class-pill"><span>🔁 Štafetová</span>navazující jízdy</div>
+        <div class="vyzva-pill class-pill"><span>🗺 Strategická</span>body na mapě</div>
+        <div class="vyzva-pill"><span>❤ Charitativní</span>km pro dobrou věc</div>
+      </div>
+      <p class="note" id="class-note" style="margin-top:.65rem; display:none; color:rgba(255,160,20,.7);">
+        ⚠ Šedé výzvy jsou dostupné pouze při přihlášení ke konkrétní třídě.
+      </p>
+
+      <button class="btn-submit" onclick="submitForm()">🚴 Zaregistrovat se</button>
+      <p class="free-note">Účast je zcela zdarma &nbsp;·&nbsp; schooly.cz</p>
+
+    </div>
+
+    <!-- POTVRZENÍ -->
+    <div id="confirm-screen">
+      <div class="confirm-icon">🎉</div>
+      <p class="confirm-name" id="confirm-name"></p>
+      <p class="confirm-detail" id="confirm-detail"></p>
+      <div class="strava-note">
+        <strong>Další krok:</strong> Přihlas se na <a href="https://www.schooly.cz" target="_blank">schooly.cz</a>
+        a klikni na <em>„Propojit se Stravou"</em>. Od <strong>4. 5.</strong> se všechny jízdy
+        načítají automaticky — stačí vyjet ven.<br><br>
+        Dotazy? <a href="mailto:info@schooly.cz">info@schooly.cz</a> &nbsp;·&nbsp;
+        <a href="https://instagram.com/schooly.cz" target="_blank">@schooly.cz</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <a href="https://www.schooly.cz" target="_blank">www.schooly.cz</a> &nbsp;·&nbsp;
+  info@schooly.cz &nbsp;·&nbsp; @schooly.cz
+</footer>
+
+<script>
+const TRIDY = {
+  gymberoun: ['1A','1B','2A','2B','3A','3B','4A','4B','5KTA','6SA'],
+  jina:      ['1. ročník','2. ročník','3. ročník','4. ročník','Jiný ročník']
+};
+
+function setClassPills(hasClass) {
+  document.querySelectorAll('.class-pill').forEach(p => p.classList.toggle('dim', !hasClass));
+  document.getElementById('class-note').style.display = hasClass ? 'none' : 'block';
+}
+
+function onRoleChange() {
+  const role = document.getElementById('role').value;
+  const schoolBlock = document.getElementById('school-block');
+  const fieldTrida  = document.getElementById('field-trida');
+  const ucitelNote  = document.getElementById('ucitel-note');
+
+  schoolBlock.style.display = (role === 'student' || role === 'ucitel') ? '' : 'none';
+  fieldTrida.style.display  = 'none';
+  ucitelNote.style.display  = (role === 'ucitel') ? '' : 'none';
+
+  // reset school/trida
+  document.getElementById('school').value = '';
+  document.getElementById('trida').innerHTML = '<option value="">– nejdřív vyber školu –</option>';
+
+  if (role === 'ucitel') setClassPills(true); // učitel má třídní výzvy jako tým
+  else if (role === 'verejnost') setClassPills(false);
+  else setClassPills(true);
+}
+
+function onSchoolChange() {
+  const role   = document.getElementById('role').value;
+  const school = document.getElementById('school').value;
+  const sel    = document.getElementById('trida');
+  const field  = document.getElementById('field-trida');
+
+  sel.innerHTML = '';
+
+  if (!school) { field.style.display = 'none'; return; }
+
+  if (role === 'ucitel') {
+    // učitel se nepřihlašuje ke třídě
+    field.style.display = 'none';
+    return;
+  }
+
+  field.style.display = '';
+  sel.appendChild(new Option('– vyber třídu –', ''));
+  sel.appendChild(new Option('Bez třídy (pouze individuální výzvy)', 'bez'));
+  (TRIDY[school] || []).forEach(t => sel.appendChild(new Option(t, t)));
+  document.getElementById('trida-note').textContent = '';
+  setClassPills(true);
+}
+
+function onTridaChange() {
+  const val  = document.getElementById('trida').value;
+  const note = document.getElementById('trida-note');
+  if (val === 'bez') {
+    note.innerHTML = '⚠ Bez třídy soutěžíš pouze v individuálních výzvách.';
+    setClassPills(false);
+  } else if (val) {
+    note.innerHTML = '✅ Soutěžíš <strong>zároveň</strong> jako jednotlivec i jako člen třídy — automaticky.';
+    setClassPills(true);
+  } else {
+    note.textContent = '';
+    setClassPills(true);
+  }
+}
+
+// ← SEM vlož URL z nasazení Google Apps Script web app
+const GAS_URL = "https://script.google.com/macros/s/18ITONPXJOykuVsLXD-Ke5EyTpuYSxqSTARdbWubozBc  /exec";
+
+const SCHOOL_NAMES = {
+  gymberoun: 'Gymnázium J. Barranda Beroun',
+  jina: 'Jiná škola'
+};
+
+async function submitForm() {
+  const name   = document.getElementById('name').value.trim();
+  const email  = document.getElementById('email').value.trim();
+  const role   = document.getElementById('role').value;
+  const school = document.getElementById('school') ? document.getElementById('school').value : '';
+  const trida  = document.getElementById('trida')  ? document.getElementById('trida').value  : '';
+  const strava = document.getElementById('strava') ? document.getElementById('strava').value.trim() : '';
+
+  if (!name)                          { alert('Vyplň prosím jméno.'); return; }
+  if (!email || !email.includes('@')) { alert('Vyplň prosím platný e-mail.'); return; }
+  if (!role)                          { alert('Vyber prosím typ účastníka.'); return; }
+  if ((role === 'student' || role === 'ucitel') && !school) { alert('Vyber prosím školu.'); return; }
+  if (role === 'student' && !trida)   { alert('Vyber prosím třídu.'); return; }
+
+  // Sestavení zobrazovaného detailu
+  let detail = '';
+  if (role === 'ucitel') {
+    detail = (SCHOOL_NAMES[school] || school) + '\nTým učitelů';
+  } else if (role === 'student') {
+    detail = SCHOOL_NAMES[school] || school;
+    if (trida === 'bez') detail += '\nBez třídy — individuální výzvy';
+    else if (trida)      detail += ' · třída ' + trida + '\nIndividuální i třídní výzvy';
+  } else {
+    detail = 'Veřejnost — individuální výzvy';
+  }
+  detail += '\n' + email;
+
+  // Sestavení dat pro Sheet
+  const roleLabels = { student: 'Student', ucitel: 'Učitel', verejnost: 'Veřejnost' };
+  const tridaLabel = trida === 'bez' ? 'Bez třídy' : (role === 'ucitel' ? 'Tým učitelů' : trida);
+  const payload = {
+    name,
+    email,
+    role:   roleLabels[role] || role,
+    school: SCHOOL_NAMES[school] || school || '–',
+    trida:  tridaLabel || '–',
+    strava: strava || '–'
+  };
+
+  // Odeslání — zobraz spinner
+  const btn = document.querySelector('.btn-submit');
+  btn.textContent = '⏳ Odesílám…';
+  btn.disabled = true;
+
+  try {
+    await fetch(GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors',   // GAS vyžaduje no-cors z externích domén
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    // no-cors → nemůžeme číst response, ale data se odešlou
+  } catch (err) {
+    console.warn('Fetch chyba (ignorováno u no-cors):', err);
+  }
+
+  // Zobraz potvrzení
+  document.getElementById('confirm-name').textContent = '✅ ' + name;
+  document.getElementById('confirm-detail').textContent = detail;
+  document.getElementById('reg-form').style.display = 'none';
+  document.getElementById('confirm-screen').style.display = 'block';
+}
+</script>
+</body>
+</html>
