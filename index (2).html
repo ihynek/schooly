@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schooly – Běžecká výzva 2026 | Gymnázium Joachima Barranda Beroun</title>
+<meta name="description" content="Jak se zapojit do běžecké výzvy Schooly 1.–23. 12. 2026 – registrace přes Stravu, pravidla a tipy.">
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --text: #1d2433;
+    --muted: #5b6478;
+    --accent: #e8452c;
+    --accent-soft: #fde9e5;
+    --dark: #14213d;
+    --ok: #1f8a4c;
+    --ok-soft: #e3f4ea;
+    --warn-soft: #fff4d6;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    font-size: 17px;
+  }
+  header {
+    background: var(--dark);
+    color: #fff;
+    padding: 40px 20px 34px;
+    text-align: center;
+  }
+  header .school { font-size: 0.9rem; opacity: 0.8; letter-spacing: 0.03em; }
+  header h1 { margin: 8px 0 6px; font-size: 2.1rem; line-height: 1.15; }
+  header h1 span { color: var(--accent); }
+  header .dates {
+    display: inline-block;
+    margin-top: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 1.05rem;
+  }
+  #countdown { margin-top: 14px; font-size: 0.95rem; opacity: 0.9; }
+  main { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  section {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(20, 33, 61, 0.08);
+  }
+  h2 { margin: 0 0 12px; font-size: 1.3rem; }
+  p { margin: 0 0 10px; }
+  p:last-child { margin-bottom: 0; }
+  .steps { list-style: none; padding: 0; margin: 0; counter-reset: step; }
+  .steps li {
+    position: relative;
+    padding: 0 0 18px 52px;
+    counter-increment: step;
+  }
+  .steps li:last-child { padding-bottom: 0; }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0; top: 0;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .steps strong { display: block; margin-bottom: 2px; }
+  .rules { padding-left: 20px; margin: 0; }
+  .rules li { margin-bottom: 8px; }
+  .rules li:last-child { margin-bottom: 0; }
+  .box {
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 12px;
+    font-size: 0.97rem;
+  }
+  .box.important { background: var(--accent-soft); border-left: 4px solid var(--accent); }
+  .box.tip { background: var(--ok-soft); border-left: 4px solid var(--ok); }
+  .box.note { background: var(--warn-soft); border-left: 4px solid #e0a800; }
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 12px 22px;
+    border-radius: 10px;
+    margin-top: 8px;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  a { color: var(--accent); }
+  .qr { margin-top: 18px; padding: 14px; background: #fff; border: 1px solid #dde2ea; border-radius: 10px; display: inline-block; text-align: center; }
+  .qr-label { margin-top: 6px; font-size: 0.85rem; color: var(--muted); }
+  footer { text-align: center; color: var(--muted); font-size: 0.9rem; padding: 10px 16px 30px; }
+  @media (max-width: 480px) {
+    header h1 { font-size: 1.7rem; }
+    body { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="school">Gymnázium Joachima Barranda Beroun</div>
+  <h1>Schooly <span>Běžecká výzva</span> 2026</h1>
+  <div class="dates">1. – 23. prosince 2026</div>
+  <div id="countdown"></div>
+</header>
+
+<main>
+
+  <section>
+    <h2>🏃 Co je Schooly?</h2>
+    <p>Schooly je celostátní běžecká výzva pro školy. Celý prosinec běháš, kdy chceš a kde chceš, a tvoje kilometry se počítají tobě i tvé třídě. Soutěží se se studenty z celé republiky.</p>
+    <p>Kilometry se nezapisují ručně. Běh zaznamenáš ve Stravě a Schooly si ho načte samo.</p>
+  </section>
+
+  <section>
+    <h2>✅ Jak se zapojit</h2>
+    <ol class="steps">
+      <li>
+        <strong>Založ si Stravu</strong>
+        Stáhni si aplikaci <b>Strava</b> (zdarma, Android i iPhone) a založ si účet. Pokud už ji máš, přeskoč tenhle krok.
+      </li>
+      <li>
+        <strong>Zaregistruj se na schooly.cz</strong>
+        Otevři <a href="https://schooly.cz" target="_blank" rel="noopener">schooly.cz</a>, klikni na <b>Connect with Strava</b> a povol přístup. Pak vyber školu <b>Gymnázium Joachima Barranda Beroun</b> a <b>svou třídu</b>. Za kterou třídu se zaregistruješ, za tu poběžíš.
+      </li>
+      <li>
+        <strong>Nastav viditelnost aktivit na „Sledující“</strong>
+        Ve Stravě v nastavení soukromí nastav viditelnost aktivit na <b>Sledující</b> (Followers). Tvoje běhy tak nebudou veřejné a Schooly je přesto načte.
+      </li>
+    </ol>
+    <div class="box important">
+      <b>Pozor:</b> Aktivity nastavené na <b>„Jen já“</b> Schooly nevidí a nezapočítají se.
+    </div>
+  </section>
+
+  <section>
+    <h2>📍 Jak zaznamenávat běhy</h2>
+    <ul class="rules">
+      <li>Před během zapni záznam ve <b>Stravě</b>, nebo běhej s hodinkami, které se se Stravou synchronizují.</li>
+      <li>Počítají se <b>jen aktivity zaznamenané přes GPS</b>. <b>Ručně zadané</b> aktivity se nezapočítají.</li>
+      <li>Počítají se běhy od <b>1. 12.</b> do <b>23. 12. 2026</b>.</li>
+      <li>Než aktivitu uložíš, zkontroluj, že má viditelnost <b>Sledující</b>, ne „Jen já“.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🔒 Tipy k soukromí</h2>
+    <div class="box tip" style="margin-top:0">
+      <b>Skryj začátek a konec trasy.</b> Ve Stravě si v nastavení soukromí zapni skrytí začátku a konce trasy na mapě. Když vybíháš z domu, nebude na mapě vidět, kde bydlíš. Kilometry se ti započítají stejně.
+    </div>
+    <div class="box note">
+      <b>Mladší studenti (prima, sekunda):</b> Strava má věkový limit pro založení účtu. Pokud ho ještě nesplňuješ, domluv se s rodiči.
+    </div>
+  </section>
+
+  <section>
+    <h2>📊 Výsledky a další info</h2>
+    <p>Průběžné výsledky jednotlivců i tříd najdeš přímo na webu Schooly.</p>
+    <a class="btn" href="https://schooly.cz" target="_blank" rel="noopener">Přejít na schooly.cz →</a>
+    <div class="qr">
+      <svg viewBox="0 0 25 25" role="img" aria-label="QR kód na schooly.cz" style="width:130px;height:130px;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg" class="segno"><path class="qrline" stroke="#14213d" d="M0 0.5h7m4 0h1m6 0h7m-25 1h1m5 0h1m6 0h1m2 0h1m1 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m3 0h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m1 0h2m2 0h1m5 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m2 0h1m3 0h2m3 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m1 0h2m8 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-17 1h1m2 0h2m2 0h2m-16 1h2m3 0h1m3 0h2m1 0h2m1 0h1m1 0h2m1 0h1m-21 1h5m2 0h3m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2m-24 1h2m1 0h1m1 0h1m1 0h3m1 0h1m2 0h1m1 0h2m2 0h2m1 0h1m-24 1h5m3 0h1m2 0h2m3 0h2m2 0h1m-22 1h1m3 0h1m1 0h1m3 0h2m1 0h1m4 0h1m5 0h1m-22 1h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h2m1 0h2m3 0h2m-25 1h4m1 0h13m3 0h2m1 0h1m-17 1h1m1 0h1m1 0h1m1 0h1m1 0h1m2 0h3m-22 1h2m1 0h2m1 0h5m1 0h1m3 0h5m2 0h1m-16 1h2m1 0h1m2 0h1m1 0h1m3 0h1m3 0h1m-25 1h7m4 0h3m2 0h1m1 0h1m1 0h1m3 0h1m-25 1h1m5 0h1m2 0h1m2 0h5m3 0h1m3 0h1m-25 1h1m1 0h3m1 0h1m4 0h1m1 0h1m1 0h6m2 0h2m-25 1h1m1 0h3m1 0h1m2 0h3m1 0h5m2 0h1m1 0h2m-24 1h1m1 0h3m1 0h1m1 0h2m1 0h3m3 0h1m1 0h3m1 0h2m-25 1h1m5 0h1m1 0h3m1 0h2m2 0h5m-21 1h7m2 0h1m3 0h2m1 0h1m4 0h1m2 0h1"/></svg>
+      <div class="qr-label">Načti QR kód – vede na schooly.cz</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>❓ Dotazy</h2>
+    <p>S dotazy se obracej na koordinátora výzvy za naši školu:</p>
+    <p><b>Mgr. Ivan Hynek</b><br>
+    <a href="mailto:ivan.hynek@gymberoun.cz">ivan.hynek@gymberoun.cz</a></p>
+  </section>
+
+</main>
+
+<footer>
+  Gymnázium Joachima Barranda Beroun · Běžecká výzva Schooly 2026
+</footer>
+
+<script>
+  (function () {
+    var el = document.getElementById('countdown');
+    var start = new Date(2026, 11, 1);   // 1. 12. 2026
+    var end = new Date(2026, 11, 24);    // konec dne 23. 12. 2026
+    var now = new Date();
+    var day = 24 * 60 * 60 * 1000;
+    function dny(n) { return n === 1 ? 'den' : (n >= 2 && n <= 4 ? 'dny' : 'dní'); }
+    if (now < start) {
+      var d = Math.ceil((start - now) / day);
+      el.textContent = 'Výzva začíná za ' + d + ' ' + dny(d) + '.';
+    } else if (now < end) {
+      var r = Math.ceil((end - now) / day);
+      el.textContent = 'Výzva právě probíhá – zbývá ' + r + ' ' + dny(r) + '. Běž!';
+    } else {
+      el.textContent = 'Výzva skončila. Díky všem, kdo běželi!';
+    }
+  })();
+</script>
+
+</body>
+</html>
